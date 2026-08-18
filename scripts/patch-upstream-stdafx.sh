@@ -715,11 +715,11 @@ print(f"patch-upstream-stdafx: added nullptr arg to finalizeMobSpawn in {path}")
 PY
 fi
 
-# Ozelot.h overrides LivingEntity::getMaxHealth() (returns float) with an
+# Ocelot.h overrides LivingEntity::getMaxHealth() (returns float) with an
 # int override. Rename to float to satisfy the covariant return rule.
-OZH="$REPO_ROOT/upstream/Minecraft.World/Ozelot.h"
+OZH="$REPO_ROOT/upstream/Minecraft.World/Ocelot.h"
 if grep -q 'virtual float getMaxHealth()' "$OZH"; then
-    echo "patch-upstream-stdafx: Ozelot.h already patched, skipping"
+    echo "patch-upstream-stdafx: Ocelot.h already patched, skipping"
 else
 python3 - "$OZH" <<'PY'
 import sys
@@ -728,29 +728,29 @@ with open(path, 'r', encoding='utf-8', errors='replace') as f:
     src = f.read()
 old = 'virtual int getMaxHealth();'
 if old not in src:
-    sys.exit("patch-upstream-stdafx: Ozelot.h getMaxHealth anchor not found")
+    sys.exit("patch-upstream-stdafx: Ocelot.h getMaxHealth anchor not found")
 patched = src.replace(old, 'virtual float getMaxHealth();', 1)
 with open(path, 'w', encoding='utf-8', newline='\n') as f:
     f.write(patched)
-print(f"patch-upstream-stdafx: rewrote Ozelot::getMaxHealth signature")
+print(f"patch-upstream-stdafx: rewrote Ocelot::getMaxHealth signature")
 PY
 fi
 # And the matching .cpp definition
-OZC="$REPO_ROOT/upstream/Minecraft.World/Ozelot.cpp"
-if grep -q 'float Ozelot::getMaxHealth' "$OZC"; then
-    echo "patch-upstream-stdafx: Ozelot.cpp already patched, skipping"
+OZC="$REPO_ROOT/upstream/Minecraft.World/Ocelot.cpp"
+if grep -q 'float Ocelot::getMaxHealth' "$OZC"; then
+    echo "patch-upstream-stdafx: Ocelot.cpp already patched, skipping"
 else
 python3 - "$OZC" <<'PY'
 import sys
 path = sys.argv[1]
 with open(path, 'r', encoding='utf-8', errors='replace') as f:
     src = f.read()
-old = 'int Ozelot::getMaxHealth'
+old = 'int Ocelot::getMaxHealth'
 if old in src:
-    src = src.replace(old, 'float Ozelot::getMaxHealth', 1)
+    src = src.replace(old, 'float Ocelot::getMaxHealth', 1)
 with open(path, 'w', encoding='utf-8', newline='\n') as f:
     f.write(src)
-print(f"patch-upstream-stdafx: rewrote Ozelot::getMaxHealth body return type")
+print(f"patch-upstream-stdafx: rewrote Ocelot::getMaxHealth body return type")
 PY
 fi
 
@@ -936,21 +936,21 @@ print(f"patch-upstream-stdafx: rewrote SetFilePointer nullptr->FILE_BEGIN in {pa
 PY
 fi
 
-# OzelotModel.cpp uses Ozelot class but only pulls the umbrella entity
-# header. Add a direct Ozelot.h include.
-OMC="$REPO_ROOT/upstream/Minecraft.Client/OzelotModel.cpp"
-if [ -f "$OMC" ] && ! grep -q '#include "../Minecraft.World/Ozelot.h"' "$OMC"; then
+# OcelotModel.cpp uses Ocelot class but only pulls the umbrella entity
+# header. Add a direct Ocelot.h include.
+OMC="$REPO_ROOT/upstream/Minecraft.Client/OcelotModel.cpp"
+if [ -f "$OMC" ] && ! grep -q '#include "../Minecraft.World/Ocelot.h"' "$OMC"; then
 python3 - "$OMC" <<'PY'
 import sys
 path = sys.argv[1]
 with open(path, 'r', encoding='utf-8', errors='replace') as f:
     src = f.read()
-needle = '#include "OzelotModel.h"'
+needle = '#include "OcelotModel.h"'
 if needle in src:
-    src = src.replace(needle, needle + '\n#include "../Minecraft.World/Ozelot.h"', 1)
+    src = src.replace(needle, needle + '\n#include "../Minecraft.World/Ocelot.h"', 1)
 with open(path, 'w', encoding='utf-8', newline='\n') as f:
     f.write(src)
-print(f"patch-upstream-stdafx: added Ozelot.h include to {path}")
+print(f"patch-upstream-stdafx: added Ocelot.h include to {path}")
 PY
 fi
 
