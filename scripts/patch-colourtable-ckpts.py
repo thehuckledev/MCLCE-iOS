@@ -10,7 +10,12 @@ if "CT_CKPT" in src:
 old = (
     "unsigned int ColourTable::getColour(eMinecraftColour id)\n"
     "{\n"
-    "\treturn m_colourValues[static_cast<int>(id)];\n"
+    "\tint idx = static_cast<int>(id);\n"
+    "\tif (idx >= 0 && idx < eMinecraftColour_COUNT)\n"
+    "\t{\n"
+    "\t\treturn m_colourValues[idx];\n"
+    "\t}\n"
+    "\treturn 0; // Return black for invalid IDs\n"
     "}"
 )
 new = (
@@ -21,11 +26,12 @@ new = (
     "\t\tapp.DebugPrintf(\"CT_CKPT getColour this=%p id=%d\", this, (int)id);\n"
     "\t\ts_logCount++;\n"
     "\t}\n"
-    "\tif (this == nullptr) {\n"
-    "\t\tapp.DebugPrintf(\"CT_CKPT getColour this=null - return 0x78A7FF id=%d\", (int)id);\n"
-    "\t\treturn 0x78A7FF;\n"
+    "\tint idx = static_cast<int>(id);\n"
+    "\tif (idx >= 0 && idx < eMinecraftColour_COUNT)\n"
+    "\t{\n"
+    "\t\treturn m_colourValues[idx];\n"
     "\t}\n"
-    "\treturn m_colourValues[static_cast<int>(id)];\n"
+    "\treturn 0; // Return black for invalid IDs\n"
     "}"
 )
 if old not in src: sys.exit("anchor not found")
