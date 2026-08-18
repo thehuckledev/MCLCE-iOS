@@ -8,7 +8,7 @@ if "CRB_CKPT" in src:
     print("already patched"); sys.exit(0)
 
 # Entry
-old = "void Chunk::rebuild()\n{\n\tPIXBeginNamedEvent(0,\"Rebuilding chunk %d, %d, %d\", x, y, z);"
+old = "void Chunk::rebuild()\n{\n\tif (this == nullptr) return;\n\tPIXBeginNamedEvent(0,\"Rebuilding chunk %d, %d, %d\", x, y, z);"
 new = (
     "void Chunk::rebuild()\n{\n"
     "\tapp.DebugPrintf(\"CRB_CKPT enter this=%p x=%d y=%d z=%d levelRenderer=%p level=%p\", this, x, y, z, levelRenderer, level);\n"
