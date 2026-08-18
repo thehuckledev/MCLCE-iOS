@@ -3,7 +3,7 @@
 	url = https://git.minecraftlegacy.com/backups/MinecraftConsoles.git
 [submodule "third_party/4JLibs"]
 	path = third_party/4JLibs
-	url = https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git
+	url = https://github.com/thehuckledev/mmm.git
 [submodule "third_party/gameswf"]
 	path = third_party/gameswf
 	url = https://github.com/marmalade/gameswf.git
