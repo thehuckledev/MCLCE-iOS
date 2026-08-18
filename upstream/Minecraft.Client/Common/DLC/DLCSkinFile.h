@@ -1,0 +1,34 @@
+#pragma once
+#include "DLCFile.h"
+#include "../../../Minecraft.Client/HumanoidModel.h"
+#include "../../../Minecraft.World/Entity.h"
+
+class DLCSkinFile : public DLCFile
+{
+
+private:
+	wstring m_displayName;
+	wstring m_themeName;
+	wstring m_cape;
+	unsigned int m_uiAnimOverrideBitmask;
+	bool m_bIsFree;
+	vector<SKIN_BOX *> m_AdditionalBoxes;
+	vector<SKIN_OFFSET *> m_Offsets;
+	_SkinAdjustments m_skinAdjustments;
+
+public:
+
+	DLCSkinFile(const wstring &path);
+	void getSkinAdjustments(_SkinAdjustments* adj);
+    void addData(PBYTE pbData, DWORD dwBytes) override;
+    void addParameter(DLCManager::EDLCParameterType type, const wstring &value) override;
+
+    wstring getParameterAsString(DLCManager::EDLCParameterType type) override;
+    bool getParameterAsBool(DLCManager::EDLCParameterType type) override;
+	vector<SKIN_BOX *> *getAdditionalBoxes();
+	int getAdditionalBoxesCount();
+	vector<SKIN_OFFSET *> *getOffsets();
+	int getOffsetsCount();
+	unsigned int getAnimOverrideBitmask() { return m_uiAnimOverrideBitmask;}
+	bool isFree() {return m_bIsFree;}
+};

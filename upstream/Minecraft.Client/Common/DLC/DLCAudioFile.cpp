@@ -1,0 +1,258 @@
+#include "stdafx.h"
+#include "DLCManager.h"
+#include "DLCAudioFile.h"
+#if defined _XBOX || defined _WINDOWS64
+#include "../../Xbox/XML/ATGXmlParser.h"
+#include "../../Xbox/XML/xmlFilesCallback.h"
+#endif
+
+DLCAudioFile::DLCAudioFile(const wstring &path) : DLCFile(DLCManager::e_DLCType_Audio,path)
+{	
+	m_pbData = nullptr;
+	m_dwBytes = 0;
+}
+
+void DLCAudioFile::addData(PBYTE pbData, DWORD dwBytes)
+{
+	m_pbData = pbData;
+	m_dwBytes = dwBytes;
+
+	processDLCDataFile(pbData,dwBytes);
+}
+
+PBYTE DLCAudioFile::getData(DWORD &dwBytes)
+{
+	dwBytes = m_dwBytes;
+	return m_pbData;
+}
+
+// @3UR: thanks https://github.com/LCERD/PCK-Studio/blob/500fc74395ce99fe20cbd7598999bfab3b606745/PckStudio.Core/IO/PckAudio/PckAudioFileWriter.cs#L15
+const WCHAR *DLCAudioFile::wchTypeNamesA[]=
+{
+    L"CUENAME",
+    L"CREDIT",
+    L"CREDITID",
+};
+
+DLCAudioFile::EAudioParameterType DLCAudioFile::getParameterType(const wstring &paramName)
+{
+	EAudioParameterType type = e_AudioParamType_Invalid;
+
+	for(DWORD i = 0; i < e_AudioParamType_Max; ++i)
+	{
+		if(paramName.compare(wchTypeNamesA[i]) == 0)
+		{
+			type = static_cast<EAudioParameterType>(i);
+			break;
+		}
+	}
+
+	return type;
+}
+
+void DLCAudioFile::addParameter(EAudioType type, EAudioParameterType ptype, const wstring &value)
+{
+	switch(ptype)
+	{
+
+		case e_AudioParamType_Credit: // If this parameter exists, then mark this as free
+			//add it to the DLC credits list
+
+			// we'll need to justify this text since we don't have a lot of room for lines of credits
+			{
+				// don't look for duplicate in the music credits
+
+				//if(app.AlreadySeenCreditText(value)) break;
+
+				int maximumChars = 55;
+
+				bool bIsSDMode=!RenderManager.IsHiDef() && !RenderManager.IsWidescreen();
+
+				if(bIsSDMode)
+				{
+					maximumChars = 45;
+				}
+
+				switch(XGetLanguage())
+				{
+				case XC_LANGUAGE_JAPANESE:
+				case XC_LANGUAGE_TCHINESE:
+				case XC_LANGUAGE_KOREAN:
+				    maximumChars = 55; // @3UR: this is 55 in TU30
+					break;
+				}
+				wstring creditValue = value;
+				while (creditValue.length() > maximumChars)
+				{
+					unsigned int i = 1;
+					while (i < creditValue.length() && (i + 1) <= maximumChars)
+					{
+						i++;
+					}
+					size_t iLast=creditValue.find_last_of(L" ", i);
+
+					app.AddCreditText((creditValue.substr(0, iLast)).c_str());
+					creditValue = creditValue.substr(iLast);
+				}
+				app.AddCreditText(creditValue.c_str());
+
+			}
+			break;
+		case e_AudioParamType_Cuename:
+			m_parameters[type].push_back(value);
+			//m_parameters[(int)type] = value;
+			break;
+	    // @3UR: in IDA for TU30 this is literally just empty...
+	    case e_AudioParamType_CreditId:
+	        break;
+	}
+}
+
+bool DLCAudioFile::processDLCDataFile(PBYTE pbData, DWORD dwLength)
+{
+	if(pbData == nullptr || dwLength < sizeof(unsigned int))
+	{
+		app.DebugPrintf("DLCAudioFile::processDLCDataFile: invalid data\n");
+		return false;
+	}
+
+	unordered_map<int, EAudioParameterType> parameterMapping;
+	unsigned int uiCurrentByte=0;
+
+	// File format defined in the AudioPacker
+	// File format: Version 1
+
+	unsigned int uiVersion=DLCManager::readUInt32(pbData, false);
+	uiCurrentByte+=sizeof(int);
+
+	bool bSwapEndian = false;
+	unsigned int uiVersionSwapped = DLCManager::SwapInt32(uiVersion);
+	if(uiVersion >= 0 && uiVersion <= CURRENT_AUDIO_VERSION_NUM)
+	{
+		bSwapEndian = false;
+	}
+	else if(uiVersionSwapped >= 0 && uiVersionSwapped <= CURRENT_AUDIO_VERSION_NUM)
+	{
+		bSwapEndian = true;
+	}
+	else
+	{
+		if(pbData!=nullptr) delete [] pbData;
+		app.DebugPrintf("Unknown audio version %d\n", uiVersion);
+		return false;
+	}
+
+	if(uiVersion < CURRENT_AUDIO_VERSION_NUM)
+	{
+		if(pbData!=nullptr) delete [] pbData;
+		app.DebugPrintf("DLC version of %d is too old to be read\n", uiVersion);
+		return false;
+	}
+	
+	unsigned int uiParameterTypeCount=DLCManager::readUInt32(&pbData[uiCurrentByte], bSwapEndian);
+	uiCurrentByte+=sizeof(int);
+	C4JStorage::DLC_FILE_PARAM *pParams = (C4JStorage::DLC_FILE_PARAM *)&pbData[uiCurrentByte];
+	
+	for(unsigned int i=0;i<uiParameterTypeCount;i++)
+	{
+		pParams->dwType = bSwapEndian ? DLCManager::SwapInt32(pParams->dwType) : pParams->dwType;
+		pParams->dwWchCount = bSwapEndian ? DLCManager::SwapInt32(pParams->dwWchCount) : pParams->dwWchCount;
+		char16_t* wchData = reinterpret_cast<char16_t*>(pParams->wchData);
+		if (bSwapEndian) {
+			DLCManager::SwapUTF16Bytes(wchData, pParams->dwWchCount);
+		}
+
+		// Map DLC strings to application strings, then store the DLC index mapping to application index
+		wstring parameterName(reinterpret_cast<WCHAR *>(pParams->wchData), pParams->dwWchCount);
+		EAudioParameterType type = getParameterType(parameterName);
+		if( type != e_AudioParamType_Invalid )
+		{
+			parameterMapping[pParams->dwType] = type;
+		}
+		uiCurrentByte+= sizeof(C4JStorage::DLC_FILE_PARAM)+(pParams->dwWchCount*sizeof(WCHAR));
+		pParams = (C4JStorage::DLC_FILE_PARAM *)&pbData[uiCurrentByte];
+	}
+	unsigned int uiFileCount=DLCManager::readUInt32(&pbData[uiCurrentByte], bSwapEndian);
+	uiCurrentByte+=sizeof(int);
+	C4JStorage::DLC_FILE_DETAILS *pFile = (C4JStorage::DLC_FILE_DETAILS *)&pbData[uiCurrentByte];
+
+	DWORD dwTemp=uiCurrentByte;
+	for(unsigned int i=0;i<uiFileCount;i++)
+	{
+		pFile->dwWchCount = bSwapEndian ? DLCManager::SwapInt32(pFile->dwWchCount) : pFile->dwWchCount;
+		dwTemp+=sizeof(C4JStorage::DLC_FILE_DETAILS)+pFile->dwWchCount*sizeof(WCHAR);
+		pFile = (C4JStorage::DLC_FILE_DETAILS *)&pbData[dwTemp];
+	}
+	PBYTE pbTemp=((PBYTE )pFile);
+	pFile = (C4JStorage::DLC_FILE_DETAILS *)&pbData[uiCurrentByte];
+
+	for(unsigned int i=0;i<uiFileCount;i++)
+	{
+		pFile->dwType = bSwapEndian ? DLCManager::SwapInt32(pFile->dwType) : pFile->dwType;
+		pFile->uiFileSize = bSwapEndian ? DLCManager::SwapInt32(pFile->uiFileSize) : pFile->uiFileSize;
+		char16_t* wchFile = reinterpret_cast<char16_t*>(pFile->wchFile);
+		if (bSwapEndian) {
+			DLCManager::SwapUTF16Bytes(wchFile, pFile->dwWchCount);
+		}
+
+		EAudioType type = static_cast<EAudioType>(pFile->dwType);
+
+		//Bounds Checking
+		if (type < 0 || type >= e_AudioType_Max) 
+		{
+			app.DebugPrintf("Error parser: EAudioType (%d) out of bounds!\n", type);
+			
+			continue; 
+		}
+		// Params
+		unsigned int uiParameterCount=DLCManager::readUInt32(pbTemp, bSwapEndian);
+		pbTemp+=sizeof(int);
+		pParams = (C4JStorage::DLC_FILE_PARAM *)pbTemp;
+		for(unsigned int j=0;j<uiParameterCount;j++)
+		{
+			pParams->dwType = bSwapEndian ? DLCManager::SwapInt32(pParams->dwType) : pParams->dwType;
+			pParams->dwWchCount = bSwapEndian ? DLCManager::SwapInt32(pParams->dwWchCount) : pParams->dwWchCount;
+			char16_t* wchData = reinterpret_cast<char16_t*>(pParams->wchData);
+			if (bSwapEndian) {
+				DLCManager::SwapUTF16Bytes(wchData, pParams->dwWchCount);
+			}
+
+			//EAudioParameterType paramType = e_AudioParamType_Invalid;
+
+			auto it = parameterMapping.find(pParams->dwType);
+
+			if(it != parameterMapping.end() )
+			{
+ 				//addParameter(type,static_cast<EAudioParameterType>(pParams->dwType),(WCHAR *)pParams->wchData);
+				addParameter(type, it->second, (WCHAR *)pParams->wchData);
+			}
+			pbTemp+=sizeof(C4JStorage::DLC_FILE_PARAM)+(sizeof(WCHAR)*pParams->dwWchCount);
+			pParams = (C4JStorage::DLC_FILE_PARAM *)pbTemp;
+		}
+		// Move the pointer to the start of the next files data;
+		pbTemp+=pFile->uiFileSize;
+		uiCurrentByte+=sizeof(C4JStorage::DLC_FILE_DETAILS)+pFile->dwWchCount*sizeof(WCHAR);
+
+		pFile=(C4JStorage::DLC_FILE_DETAILS *)&pbData[uiCurrentByte];
+
+	}
+
+	return true;
+}
+
+int DLCAudioFile::GetCountofType(EAudioType eType)
+{
+	return m_parameters[eType].size();
+}
+
+
+wstring &DLCAudioFile::GetSoundName(int iIndex)
+{
+	int iWorldType=e_AudioType_Overworld;
+	while(iIndex>=m_parameters[iWorldType].size())
+	{
+		iIndex-=m_parameters[iWorldType].size();
+		iWorldType++;
+	}
+	return m_parameters[iWorldType].at(iIndex);
+}

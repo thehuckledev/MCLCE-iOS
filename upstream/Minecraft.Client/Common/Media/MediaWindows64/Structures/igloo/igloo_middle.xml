@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Structure author="Searge" version="1">
+    <Size width="3" height="3" length="3" />
+    <Palette>
+        <Block index="0" name="minecraft:stonebrick">
+            <Property name="variant">stonebrick</Property>
+        </Block>
+        <Block index="1" name="minecraft:ladder">
+            <Property name="facing">north</Property>
+        </Block>
+    </Palette>
+    <Blocks>
+        <Block x="1" y="0" z="0" index="0" />
+        <Block x="1" y="1" z="0" index="0" />
+        <Block x="1" y="2" z="0" index="0" />
+        <Block x="0" y="0" z="1" index="0" />
+        <Block x="2" y="0" z="1" index="0" />
+        <Block x="0" y="1" z="1" index="0" />
+        <Block x="2" y="1" z="1" index="0" />
+        <Block x="0" y="2" z="1" index="0" />
+        <Block x="2" y="2" z="1" index="0" />
+        <Block x="1" y="0" z="2" index="0" />
+        <Block x="1" y="1" z="2" index="0" />
+        <Block x="1" y="2" z="2" index="0" />
+        <Block x="1" y="0" z="1" index="1" />
+        <Block x="1" y="1" z="1" index="1" />
+        <Block x="1" y="2" z="1" index="1" />
+    </Blocks>
+    <Entities />
+</Structure>

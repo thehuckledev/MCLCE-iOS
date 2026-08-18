@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Structure author="ProfMobius" version="1">
+    <Size width="9" height="5" length="13" />
+    <Palette>
+        <Block index="0" name="minecraft:bone_block">
+            <Property name="axis">z</Property>
+        </Block>
+        <Block index="1" name="minecraft:bone_block">
+            <Property name="axis">x</Property>
+        </Block>
+        <Block index="2" name="minecraft:bone_block">
+            <Property name="axis">y</Property>
+        </Block>
+    </Palette>
+    <Blocks>
+        <Block x="4" y="4" z="0" index="0" />
+        <Block x="1" y="0" z="1" index="1" />
+        <Block x="2" y="0" z="1" index="1" />
+        <Block x="6" y="0" z="1" index="1" />
+        <Block x="7" y="0" z="1" index="1" />
+        <Block x="0" y="1" z="1" index="2" />
+        <Block x="8" y="1" z="1" index="2" />
+        <Block x="0" y="2" z="1" index="2" />
+        <Block x="8" y="2" z="1" index="2" />
+        <Block x="0" y="3" z="1" index="2" />
+        <Block x="8" y="3" z="1" index="2" />
+        <Block x="0" y="4" z="1" index="1" />
+        <Block x="1" y="4" z="1" index="1" />
+        <Block x="2" y="4" z="1" index="1" />
+        <Block x="3" y="4" z="1" index="1" />
+        <Block x="4" y="4" z="1" index="0" />
+        <Block x="5" y="4" z="1" index="1" />
+        <Block x="6" y="4" z="1" index="1" />
+        <Block x="7" y="4" z="1" index="1" />
+        <Block x="8" y="4" z="1" index="1" />
+        <Block x="4" y="4" z="2" index="0" />
+        <Block x="1" y="0" z="3" index="1" />
+        <Block x="2" y="0" z="3" index="1" />
+        <Block x="6" y="0" z="3" index="1" />
+        <Block x="7" y="0" z="3" index="1" />
+        <Block x="0" y="1" z="3" index="2" />
+        <Block x="8" y="1" z="3" index="2" />
+        <Block x="0" y="2" z="3" index="2" />
+        <Block x="8" y="2" z="3" index="2" />
+        <Block x="0" y="3" z="3" index="2" />
+        <Block x="8" y="3" z="3" index="2" />
+        <Block x="0" y="4" z="3" index="1" />
+        <Block x="1" y="4" z="3" index="1" />
+        <Block x="2" y="4" z="3" index="1" />
+        <Block x="3" y="4" z="3" index="1" />
+        <Block x="4" y="4" z="3" index="0" />
+        <Block x="5" y="4" z="3" index="1" />
+        <Block x="6" y="4" z="3" index="1" />
+        <Block x="7" y="4" z="3" index="1" />
+        <Block x="8" y="4" z="3" index="1" />
+        <Block x="4" y="4" z="4" index="0" />
+        <Block x="1" y="0" z="5" index="1" />
+        <Block x="2" y="0" z="5" index="1" />
+        <Block x="6" y="0" z="5" index="1" />
+        <Block x="7" y="0" z="5" index="1" />
+        <Block x="0" y="1" z="5" index="2" />
+        <Block x="8" y="1" z="5" index="2" />
+        <Block x="0" y="2" z="5" index="2" />
+        <Block x="8" y="2" z="5" index="2" />
+        <Block x="0" y="3" z="5" index="2" />
+        <Block x="8" y="3" z="5" index="2" />
+        <Block x="0" y="4" z="5" index="1" />
+        <Block x="1" y="4" z="5" index="1" />
+        <Block x="2" y="4" z="5" index="1" />
+        <Block x="3" y="4" z="5" index="1" />
+        <Block x="4" y="4" z="5" index="0" />
+        <Block x="5" y="4" z="5" index="1" />
+        <Block x="6" y="4" z="5" index="1" />
+        <Block x="7" y="4" z="5" index="1" />
+        <Block x="8" y="4" z="5" index="1" />
+        <Block x="4" y="4" z="6" index="0" />
+        <Block x="1" y="0" z="7" index="1" />
+        <Block x="2" y="0" z="7" index="1" />
+        <Block x="6" y="0" z="7" index="1" />
+        <Block x="7" y="0" z="7" index="1" />
+        <Block x="0" y="1" z="7" index="2" />
+        <Block x="8" y="1" z="7" index="2" />
+        <Block x="0" y="2" z="7" index="2" />
+        <Block x="8" y="2" z="7" index="2" />
+        <Block x="0" y="3" z="7" index="2" />
+        <Block x="8" y="3" z="7" index="2" />
+        <Block x="0" y="4" z="7" index="1" />
+        <Block x="1" y="4" z="7" index="1" />
+        <Block x="2" y="4" z="7" index="1" />
+        <Block x="3" y="4" z="7" index="1" />
+        <Block x="4" y="4" z="7" index="0" />
+        <Block x="5" y="4" z="7" index="1" />
+        <Block x="6" y="4" z="7" index="1" />
+        <Block x="7" y="4" z="7" index="1" />
+        <Block x="8" y="4" z="7" index="1" />
+        <Block x="4" y="4" z="8" index="0" />
+        <Block x="1" y="0" z="9" index="1" />
+        <Block x="2" y="0" z="9" index="1" />
+        <Block x="6" y="0" z="9" index="1" />
+        <Block x="7" y="0" z="9" index="1" />
+        <Block x="0" y="1" z="9" index="2" />
+        <Block x="8" y="1" z="9" index="2" />
+        <Block x="0" y="2" z="9" index="2" />
+        <Block x="8" y="2" z="9" index="2" />
+        <Block x="0" y="3" z="9" index="2" />
+        <Block x="8" y="3" z="9" index="2" />
+        <Block x="0" y="4" z="9" index="1" />
+        <Block x="1" y="4" z="9" index="1" />
+        <Block x="2" y="4" z="9" index="1" />
+        <Block x="3" y="4" z="9" index="1" />
+        <Block x="4" y="4" z="9" index="0" />
+        <Block x="5" y="4" z="9" index="1" />
+        <Block x="6" y="4" z="9" index="1" />
+        <Block x="7" y="4" z="9" index="1" />
+        <Block x="8" y="4" z="9" index="1" />
+        <Block x="4" y="4" z="10" index="0" />
+        <Block x="1" y="0" z="11" index="1" />
+        <Block x="2" y="0" z="11" index="1" />
+        <Block x="6" y="0" z="11" index="1" />
+        <Block x="7" y="0" z="11" index="1" />
+        <Block x="0" y="1" z="11" index="2" />
+        <Block x="8" y="1" z="11" index="2" />
+        <Block x="0" y="2" z="11" index="2" />
+        <Block x="8" y="2" z="11" index="2" />
+        <Block x="0" y="3" z="11" index="2" />
+        <Block x="8" y="3" z="11" index="2" />
+        <Block x="0" y="4" z="11" index="1" />
+        <Block x="1" y="4" z="11" index="1" />
+        <Block x="2" y="4" z="11" index="1" />
+        <Block x="3" y="4" z="11" index="1" />
+        <Block x="4" y="4" z="11" index="0" />
+        <Block x="5" y="4" z="11" index="1" />
+        <Block x="6" y="4" z="11" index="1" />
+        <Block x="7" y="4" z="11" index="1" />
+        <Block x="8" y="4" z="11" index="1" />
+        <Block x="4" y="4" z="12" index="0" />
+    </Blocks>
+    <Entities />
+</Structure>

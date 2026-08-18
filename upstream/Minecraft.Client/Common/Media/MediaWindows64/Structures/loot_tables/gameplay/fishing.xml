@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<loot_table>
+  <pools>
+    <pool>
+      <rolls>1</rolls>
+      <entries>
+        <entry>
+          <type>loot_table</type>
+          <name>minecraft:gameplay/fishing/junk</name>
+          <weight>10</weight>
+          <quality>-2</quality>
+        </entry>
+        <entry>
+          <type>loot_table</type>
+          <name>minecraft:gameplay/fishing/treasure</name>
+          <weight>5</weight>
+          <quality>2</quality>
+        </entry>
+        <entry>
+          <type>loot_table</type>
+          <name>minecraft:gameplay/fishing/fish</name>
+          <weight>85</weight>
+          <quality>-1</quality>
+        </entry>
+      </entries>
+    </pool>
+  </pools>
+</loot_table>

@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Structure author="Searge_DP" version="1">
+    <Size width="7" height="6" length="9" />
+    <Palette>
+        <Block index="0" name="minecraft:stone">
+            <Property name="variant">stone</Property>
+        </Block>
+        <Block index="1" name="minecraft:stonebrick">
+            <Property name="variant">stonebrick</Property>
+        </Block>
+        <Block index="2" name="minecraft:stonebrick">
+            <Property name="variant">cracked_stonebrick</Property>
+        </Block>
+        <Block index="3" name="minecraft:air" />
+        <Block index="4" name="minecraft:stonebrick">
+            <Property name="variant">mossy_stonebrick</Property>
+        </Block>
+        <Block index="5" name="minecraft:stone">
+            <Property name="variant">smooth_andesite</Property>
+        </Block>
+        <Block index="6" name="minecraft:stonebrick">
+            <Property name="variant">chiseled_stonebrick</Property>
+        </Block>
+        <Block index="7" name="minecraft:monster_egg">
+            <Property name="variant">chiseled_brick</Property>
+        </Block>
+        <Block index="8" name="minecraft:monster_egg">
+            <Property name="variant">stone_brick</Property>
+        </Block>
+        <Block index="9" name="minecraft:monster_egg">
+            <Property name="variant">mossy_brick</Property>
+        </Block>
+        <Block index="10" name="minecraft:wall_sign">
+            <Property name="facing">south</Property>
+        </Block>
+        <Block index="11" name="minecraft:chest">
+            <Property name="facing">east</Property>
+        </Block>
+        <Block index="12" name="minecraft:structure_block">
+            <Property name="mode">data</Property>
+        </Block>
+        <Block index="13" name="minecraft:brewing_stand">
+            <Property name="has_bottle_2">false</Property>
+            <Property name="has_bottle_1">true</Property>
+            <Property name="has_bottle_0">false</Property>
+        </Block>
+        <Block index="14" name="minecraft:flower_pot">
+            <Property name="legacy_data">0</Property>
+            <Property name="contents">empty</Property>
+        </Block>
+        <Block index="15" name="minecraft:iron_bars">
+            <Property name="south">false</Property>
+            <Property name="north">false</Property>
+            <Property name="east">false</Property>
+            <Property name="west">false</Property>
+        </Block>
+        <Block index="16" name="minecraft:carpet">
+            <Property name="color">red</Property>
+        </Block>
+        <Block index="17" name="minecraft:web" />
+        <Block index="18" name="minecraft:torch">
+            <Property name="facing">south</Property>
+        </Block>
+        <Block index="19" name="minecraft:cauldron">
+            <Property name="level">2</Property>
+        </Block>
+        <Block index="20" name="minecraft:spruce_stairs">
+            <Property name="half">top</Property>
+            <Property name="facing">north</Property>
+            <Property name="shape">straight</Property>
+        </Block>
+        <Block index="21" name="minecraft:wooden_slab">
+            <Property name="half">top</Property>
+            <Property name="variant">spruce</Property>
+        </Block>
+        <Block index="22" name="minecraft:spruce_stairs">
+            <Property name="half">top</Property>
+            <Property name="facing">south</Property>
+            <Property name="shape">straight</Property>
+        </Block>
+        <Block index="23" name="minecraft:ladder">
+            <Property name="facing">north</Property>
+        </Block>
+        <Block index="24" name="minecraft:torch">
+            <Property name="facing">north</Property>
+        </Block>
+    </Palette>
+    <Blocks>
+        <Block x="1" y="0" z="0" index="0" />
+        <Block x="2" y="0" z="0" index="0" />
+        <Block x="3" y="0" z="0" index="0" />
+        <Block x="4" y="0" z="0" index="0" />
+        <Block x="5" y="0" z="0" index="0" />
+        <Block x="1" y="1" z="0" index="1" />
+        <Block x="2" y="1" z="0" index="1" />
+        <Block x="3" y="1" z="0" index="1" />
+        <Block x="4" y="1" z="0" index="1" />
+        <Block x="5" y="1" z="0" index="1" />
+        <Block x="1" y="2" z="0" index="1" />
+        <Block x="2" y="2" z="0" index="1" />
+        <Block x="3" y="2" z="0" index="1" />
+        <Block x="4" y="2" z="0" index="1" />
+        <Block x="5" y="2" z="0" index="1" />
+        <Block x="1" y="3" z="0" index="1" />
+        <Block x="2" y="3" z="0" index="1" />
+        <Block x="3" y="3" z="0" index="1" />
+        <Block x="4" y="3" z="0" index="1" />
+        <Block x="5" y="3" z="0" index="1" />
+        <Block x="1" y="0" z="1" index="0" />
+        <Block x="2" y="0" z="1" index="2" />
+        <Block x="3" y="0" z="1" index="0" />
+        <Block x="4" y="0" z="1" index="2" />
+        <Block x="5" y="0" z="1" index="0" />
+        <Block x="1" y="1" z="1" index="1" />
+        <Block x="2" y="1" z="1" index="3" />
+        <Block x="3" y="1" z="1" index="1" />
+        <Block x="4" y="1" z="1" index="3" />
+        <Block x="5" y="1" z="1" index="1" />
+        <Block x="1" y="2" z="1" index="1" />
+        <Block x="2" y="2" z="1" index="3" />
+        <Block x="3" y="2" z="1" index="1" />
+        <Block x="4" y="2" z="1" index="3" />
+        <Block x="5" y="2" z="1" index="1" />
+        <Block x="1" y="3" z="1" index="1" />
+        <Block x="2" y="3" z="1" index="3" />
+        <Block x="3" y="3" z="1" index="1" />
+        <Block x="4" y="3" z="1" index="3" />
+        <Block x="5" y="3" z="1" index="1" />
+        <Block x="2" y="4" z="1" index="1" />
+        <Block x="3" y="4" z="1" index="1" />
+        <Block x="4" y="4" z="1" index="1" />
+        <Block x="1" y="0" z="2" index="0" />
+        <Block x="2" y="0" z="2" index="1" />
+        <Block x="3" y="0" z="2" index="0" />
+        <Block x="4" y="0" z="2" index="1" />
+        <Block x="5" y="0" z="2" index="0" />
+        <Block x="1" y="1" z="2" index="4" />
+        <Block x="3" y="1" z="2" index="4" />
+        <Block x="5" y="1" z="2" index="4" />
+        <Block x="1" y="2" z="2" index="1" />
+        <Block x="3" y="2" z="2" index="2" />
+        <Block x="5" y="2" z="2" index="1" />
+        <Block x="1" y="3" z="2" index="1" />
+        <Block x="2" y="3" z="2" index="1" />
+        <Block x="3" y="3" z="2" index="1" />
+        <Block x="4" y="3" z="2" index="1" />
+        <Block x="5" y="3" z="2" index="1" />
+        <Block x="2" y="4" z="2" index="1" />
+        <Block x="3" y="4" z="2" index="1" />
+        <Block x="4" y="4" z="2" index="1" />
+        <Block x="1" y="0" z="3" index="5" />
+        <Block x="2" y="0" z="3" index="1" />
+        <Block x="3" y="0" z="3" index="6" />
+        <Block x="4" y="0" z="3" index="1" />
+        <Block x="5" y="0" z="3" index="7" />
+        <Block x="0" y="1" z="3" index="4" />
+        <Block x="2" y="1" z="3" index="3" />
+        <Block x="3" y="1" z="3" index="3" />
+        <Block x="4" y="1" z="3" index="3" />
+        <Block x="5" y="1" z="3" index="3" />
+        <Block x="6" y="1" z="3" index="4" />
+        <Block x="0" y="2" z="3" index="2" />
+        <Block x="1" y="2" z="3" index="3" />
+        <Block x="2" y="2" z="3" index="3" />
+        <Block x="4" y="2" z="3" index="3" />
+        <Block x="5" y="2" z="3" index="3" />
+        <Block x="6" y="2" z="3" index="1" />
+        <Block x="0" y="3" z="3" index="1" />
+        <Block x="2" y="3" z="3" index="3" />
+        <Block x="4" y="3" z="3" index="3" />
+        <Block x="5" y="3" z="3" index="3" />
+        <Block x="6" y="3" z="3" index="1" />
+        <Block x="1" y="4" z="3" index="1" />
+        <Block x="2" y="4" z="3" index="1" />
+        <Block x="3" y="4" z="3" index="1" />
+        <Block x="4" y="4" z="3" index="1" />
+        <Block x="5" y="4" z="3" index="1" />
+        <Block x="1" y="0" z="4" index="1" />
+        <Block x="2" y="0" z="4" index="8" />
+        <Block x="3" y="0" z="4" index="1" />
+        <Block x="4" y="0" z="4" index="1" />
+        <Block x="5" y="0" z="4" index="1" />
+        <Block x="0" y="1" z="4" index="4" />
+        <Block x="2" y="1" z="4" index="3" />
+        <Block x="3" y="1" z="4" index="3" />
+        <Block x="4" y="1" z="4" index="3" />
+        <Block x="6" y="1" z="4" index="4" />
+        <Block x="0" y="2" z="4" index="1" />
+        <Block x="1" y="2" z="4" index="3" />
+        <Block x="2" y="2" z="4" index="3" />
+        <Block x="3" y="2" z="4" index="3" />
+        <Block x="4" y="2" z="4" index="3" />
+        <Block x="5" y="2" z="4" index="3" />
+        <Block x="6" y="2" z="4" index="1" />
+        <Block x="0" y="3" z="4" index="8" />
+        <Block x="1" y="3" z="4" index="3" />
+        <Block x="2" y="3" z="4" index="3" />
+        <Block x="3" y="3" z="4" index="3" />
+        <Block x="4" y="3" z="4" index="3" />
+        <Block x="5" y="3" z="4" index="3" />
+        <Block x="6" y="3" z="4" index="1" />
+        <Block x="1" y="4" z="4" index="1" />
+        <Block x="2" y="4" z="4" index="1" />
+        <Block x="3" y="4" z="4" index="1" />
+        <Block x="4" y="4" z="4" index="1" />
+        <Block x="5" y="4" z="4" index="1" />
+        <Block x="1" y="0" z="5" index="6" />
+        <Block x="2" y="0" z="5" index="1" />
+        <Block x="3" y="0" z="5" index="6" />
+        <Block x="4" y="0" z="5" index="1" />
+        <Block x="5" y="0" z="5" index="6" />
+        <Block x="0" y="1" z="5" index="4" />
+        <Block x="1" y="1" z="5" index="3" />
+        <Block x="2" y="1" z="5" index="3" />
+        <Block x="3" y="1" z="5" index="3" />
+        <Block x="4" y="1" z="5" index="3" />
+        <Block x="6" y="1" z="5" index="4" />
+        <Block x="0" y="2" z="5" index="1" />
+        <Block x="1" y="2" z="5" index="3" />
+        <Block x="2" y="2" z="5" index="3" />
+        <Block x="3" y="2" z="5" index="3" />
+        <Block x="4" y="2" z="5" index="3" />
+        <Block x="5" y="2" z="5" index="3" />
+        <Block x="6" y="2" z="5" index="2" />
+        <Block x="0" y="3" z="5" index="1" />
+        <Block x="1" y="3" z="5" index="3" />
+        <Block x="2" y="3" z="5" index="3" />
+        <Block x="3" y="3" z="5" index="3" />
+        <Block x="4" y="3" z="5" index="3" />
+        <Block x="5" y="3" z="5" index="3" />
+        <Block x="6" y="3" z="5" index="1" />
+        <Block x="1" y="4" z="5" index="1" />
+        <Block x="2" y="4" z="5" index="1" />
+        <Block x="3" y="4" z="5" index="7" />
+        <Block x="4" y="4" z="5" index="1" />
+        <Block x="5" y="4" z="5" index="1" />
+        <Block x="1" y="0" z="6" index="1" />
+        <Block x="2" y="0" z="6" index="1" />
+        <Block x="3" y="0" z="6" index="1" />
+        <Block x="4" y="0" z="6" index="1" />
+        <Block x="5" y="0" z="6" index="8" />
+        <Block x="0" y="1" z="6" index="4" />
+        <Block x="2" y="1" z="6" index="3" />
+        <Block x="3" y="1" z="6" index="3" />
+        <Block x="4" y="1" z="6" index="3" />
+        <Block x="6" y="1" z="6" index="4" />
+        <Block x="0" y="2" z="6" index="2" />
+        <Block x="2" y="2" z="6" index="3" />
+        <Block x="3" y="2" z="6" index="3" />
+        <Block x="4" y="2" z="6" index="3" />
+        <Block x="6" y="2" z="6" index="8" />
+        <Block x="0" y="3" z="6" index="1" />
+        <Block x="1" y="3" z="6" index="3" />
+        <Block x="2" y="3" z="6" index="3" />
+        <Block x="3" y="3" z="6" index="3" />
+        <Block x="4" y="3" z="6" index="3" />
+        <Block x="5" y="3" z="6" index="3" />
+        <Block x="6" y="3" z="6" index="1" />
+        <Block x="1" y="4" z="6" index="1" />
+        <Block x="2" y="4" z="6" index="8" />
+        <Block x="3" y="4" z="6" index="1" />
+        <Block x="4" y="4" z="6" index="1" />
+        <Block x="5" y="4" z="6" index="1" />
+        <Block x="3" y="5" z="6" index="1" />
+        <Block x="1" y="0" z="7" index="6" />
+        <Block x="2" y="0" z="7" index="1" />
+        <Block x="3" y="0" z="7" index="6" />
+        <Block x="4" y="0" z="7" index="1" />
+        <Block x="5" y="0" z="7" index="6" />
+        <Block x="0" y="1" z="7" index="4" />
+        <Block x="1" y="1" z="7" index="3" />
+        <Block x="2" y="1" z="7" index="3" />
+        <Block x="3" y="1" z="7" index="3" />
+        <Block x="4" y="1" z="7" index="3" />
+        <Block x="6" y="1" z="7" index="4" />
+        <Block x="0" y="2" z="7" index="1" />
+        <Block x="1" y="2" z="7" index="3" />
+        <Block x="2" y="2" z="7" index="3" />
+        <Block x="4" y="2" z="7" index="3" />
+        <Block x="6" y="2" z="7" index="1" />
+        <Block x="0" y="3" z="7" index="1" />
+        <Block x="1" y="3" z="7" index="3" />
+        <Block x="5" y="3" z="7" index="3" />
+        <Block x="6" y="3" z="7" index="1" />
+        <Block x="1" y="4" z="7" index="1" />
+        <Block x="2" y="4" z="7" index="1" />
+        <Block x="4" y="4" z="7" index="1" />
+        <Block x="5" y="4" z="7" index="1" />
+        <Block x="2" y="5" z="7" index="1" />
+        <Block x="4" y="5" z="7" index="1" />
+        <Block x="1" y="1" z="8" index="4" />
+        <Block x="2" y="1" z="8" index="9" />
+        <Block x="3" y="1" z="8" index="4" />
+        <Block x="4" y="1" z="8" index="4" />
+        <Block x="5" y="1" z="8" index="4" />
+        <Block x="1" y="2" z="8" index="8" />
+        <Block x="2" y="2" z="8" index="1" />
+        <Block x="3" y="2" z="8" index="2" />
+        <Block x="4" y="2" z="8" index="1" />
+        <Block x="5" y="2" z="8" index="2" />
+        <Block x="1" y="3" z="8" index="1" />
+        <Block x="2" y="3" z="8" index="1" />
+        <Block x="3" y="3" z="8" index="1" />
+        <Block x="4" y="3" z="8" index="1" />
+        <Block x="5" y="3" z="8" index="1" />
+        <Block x="2" y="4" z="8" index="1" />
+        <Block x="3" y="4" z="8" index="1" />
+        <Block x="4" y="4" z="8" index="1" />
+        <Block x="3" y="5" z="8" index="1" />
+        <Block x="3" y="2" z="3" index="10" />
+        <Block x="1" y="1" z="6" index="11" />
+        <Block x="1" y="2" z="6" index="12" />
+        <Block x="5" y="2" z="6" index="13" />
+        <Block x="5" y="2" z="7" index="14" />
+        <Block x="2" y="1" z="2" index="15" />
+        <Block x="4" y="1" z="2" index="15" />
+        <Block x="2" y="2" z="2" index="15" />
+        <Block x="4" y="2" z="2" index="15" />
+        <Block x="1" y="1" z="3" index="16" />
+        <Block x="1" y="3" z="3" index="17" />
+        <Block x="3" y="3" z="3" index="18" />
+        <Block x="1" y="1" z="4" index="16" />
+        <Block x="5" y="1" z="4" index="19" />
+        <Block x="5" y="1" z="5" index="20" />
+        <Block x="5" y="1" z="6" index="21" />
+        <Block x="5" y="1" z="7" index="22" />
+        <Block x="3" y="2" z="7" index="23" />
+        <Block x="2" y="3" z="7" index="24" />
+        <Block x="3" y="3" z="7" index="23" />
+        <Block x="4" y="3" z="7" index="24" />
+        <Block x="3" y="4" z="7" index="23" />
+        <Block x="3" y="5" z="7" index="23" />
+    </Blocks>
+    <Entities>
+        <Entity>
+            <blockPos>[2, 1, 1]</blockPos>
+            <nbt>{'Attributes': [{'Name': 'generic.maxHealth', 'Base': 20.0}, {'Name': 'generic.knockbackResistance', 'Base': 0.0}, {'Name': 'generic.movementSpeed', 'Base': 0.5}, {'Name': 'generic.armor', 'Base': 0.0}, {'Name': 'generic.followRange', 'Base': 16.0, 'Modifiers': [{'Name': 'Random spawn bonus', 'Operation': 1, 'Amount': -0.07807250298271795, 'UUIDLeast': -9042289162618353532, 'UUIDMost': -8050404301371587461}]}], 'Age': 0, 'UUIDLeast': -8404016208519177543, 'Motion': [0.0, -0.0784000015258789, 0.0], 'Health': 20.0, 'Inventory': [], 'HandItems': [{}, {}], 'Offers': {'Recipes': [{'maxUses': 7, 'sell': {'id': 'minecraft:emerald', 'Damage': 0, 'Count': 1}, 'buy': {'id': 'minecraft:rotten_flesh', 'Damage': 0, 'Count': 36}, 'rewardExp': 1, 'uses': 0}, {'maxUses': 7, 'sell': {'id': 'minecraft:emerald', 'Damage': 0, 'Count': 1}, 'buy': {'id': 'minecraft:gold_ingot', 'Damage': 0, 'Count': 9}, 'rewardExp': 1, 'uses': 0}]}, 'Riches': 15, 'id': 'Villager', 'CareerLevel': 1, 'Career': 1, 'ArmorItems': [{}, {}, {}, {}], 'Fire': -1, 'Invulnerable': 0, 'DeathTime': 0, 'ForcedAge': 0, 'AbsorptionAmount': 0.0, 'HurtTime': 0, 'OnGround': 1, 'UUIDMost': 1009044389481761978, 'Profession': 2, 'ArmorDropChances': [0.08500000089406967, 0.08500000089406967, 0.08500000089406967, 0.08500000089406967], 'HurtByTimestamp': 0, 'Dimension': 0, 'Air': 300, 'Willing': 0, 'CanPickUpLoot': 1, 'Pos': [-72.5, 62.0, -120.5], 'PortalCooldown': 0, 'PersistenceRequired': 1, 'HandDropChances': [0.08500000089406967, 0.08500000089406967], 'Leashed': 0, 'LeftHanded': 0, 'FallDistance': 0.0, 'Rotation': [-4.32769775390625, -3.4165501594543457]}</nbt>
+            <pos>[2.5, 1.0, 1.5]</pos>
+        </Entity>
+        <Entity>
+            <blockPos>[4, 1, 1]</blockPos>
+            <nbt>{'ConversionTime': -1, 'Attributes': [{'Name': 'generic.maxHealth', 'Base': 20.0}, {'Name': 'generic.knockbackResistance', 'Base': 0.0, 'Modifiers': [{'Name': 'Random spawn bonus', 'Operation': 0, 'Amount': 0.033586338385064834, 'UUIDLeast': -9185924421726330189, 'UUIDMost': -1136549371827500916}]}, {'Name': 'generic.movementSpeed', 'Base': 0.23000000417232513}, {'Name': 'generic.armor', 'Base': 2.0}, {'Name': 'generic.followRange', 'Base': 35.0, 'Modifiers': [{'Name': 'Random spawn bonus', 'Operation': 1, 'Amount': -0.013882809459502736, 'UUIDLeast': -4972655095452447334, 'UUIDMost': -7187282525081156696}]}, {'Name': 'generic.attackDamage', 'Base': 3.0}, {'Name': 'zombie.spawnReinforcements', 'Base': 0.08507647017248195}], 'UUIDLeast': -6631449421406796428, 'Motion': [0.0, -0.0784000015258789, 0.0], 'IsVillager': 1, 'Health': 19.049999237060547, 'HandItems': [{}, {}], 'VillagerProfession': 2, 'id': 'Zombie', 'ArmorItems': [{}, {}, {}, {}], 'Fire': -1, 'Invulnerable': 0, 'DeathTime': 0, 'CanBreakDoors': 0, 'AbsorptionAmount': 0.0, 'HurtTime': 0, 'OnGround': 1, 'UUIDMost': 9169347718178752431, 'ArmorDropChances': [0.08500000089406967, 0.08500000089406967, 0.08500000089406967, 0.08500000089406967], 'HurtByTimestamp': 125, 'Dimension': 0, 'Air': 300, 'CanPickUpLoot': 0, 'Pos': [-70.5, 62.0, -120.69999998807907], 'PortalCooldown': 0, 'PersistenceRequired': 1, 'HandDropChances': [0.08500000089406967, 0.08500000089406967], 'Leashed': 0, 'LeftHanded': 0, 'FallDistance': 0.0, 'Rotation': [-95.78887939453125, 0.0]}</nbt>
+            <pos>[4.5, 1.0, 1.300000011920929]</pos>
+        </Entity>
+    </Entities>
+</Structure>

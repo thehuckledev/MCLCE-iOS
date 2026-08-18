@@ -1,0 +1,253 @@
+#include "stdafx.h"
+
+#include "net.minecraft.world.entity.item.h"
+#include "net.minecraft.world.item.h"
+#include "net.minecraft.world.phys.h"
+#include "net.minecraft.world.level.h"
+#include "net.minecraft.world.entity.player.h"
+#include "net.minecraft.world.entity.h"
+#include "net.minecraft.world.level.tile.h"
+#include "net.minecraft.world.level.saveddata.h"
+#include "com.mojang.nbt.h"
+#include "ItemFrame.h"
+#include "DamageSource.h"
+#include "Level.h"
+#include "SoundTypes.h"
+
+
+
+// 4J - added for common ctor code
+void ItemFrame::_init()
+{
+	// 4J Stu - This function call had to be moved here from the Entity ctor to ensure that
+	// the derived version of the function is called
+	this->defineSynchedData();
+
+	dropChance = 1;
+}
+
+ItemFrame::ItemFrame(Level *level) : HangingEntity( level )
+{
+	_init();
+}
+
+ItemFrame::ItemFrame(Level *level, int xTile, int yTile, int zTile, int dir) : HangingEntity( level, xTile, yTile, zTile, dir )
+{
+	_init();
+	setDir(dir);
+}
+
+void ItemFrame::defineSynchedData() 
+{
+	getEntityData()->defineNULL(DATA_ITEM, nullptr);
+	getEntityData()->define(DATA_ROTATION, static_cast<byte>(0));
+}
+
+bool ItemFrame::shouldRenderAtSqrDistance(double distance)
+{
+	double size = 16;
+	size *= 64.0f * viewScale;
+	return distance < size * size;
+}
+
+void ItemFrame::dropItem(shared_ptr<Entity> causedBy) 
+{
+	shared_ptr<ItemInstance> item = getItem();
+
+	if (causedBy != nullptr && causedBy->instanceof(eTYPE_PLAYER))
+	{
+		if (dynamic_pointer_cast<Player>(causedBy)->abilities.instabuild)
+		{
+			removeFramedMap(item);
+			return;
+		}
+	}
+
+	spawnAtLocation(std::make_shared<ItemInstance>(Item::frame), 0);
+	if ( (item != nullptr) && (random->nextFloat() < dropChance) )
+	{
+		item = item->copy();
+		removeFramedMap(item);
+		spawnAtLocation(item, 0);
+	}
+}
+
+void ItemFrame::removeFramedMap(shared_ptr<ItemInstance> item)
+{
+	if (item == nullptr) return;
+	if (item->id == Item::map_Id)
+	{
+		shared_ptr<MapItemSavedData> mapItemSavedData = Item::map->getSavedData(item, level);
+		mapItemSavedData->removeItemFrameDecoration(item);
+		//mapItemSavedData.decorations.remove("frame-" + entityId);
+	}
+	item->setFramed(nullptr);
+}
+
+shared_ptr<ItemInstance> ItemFrame::getItem() 
+{
+	return getEntityData()->getItemInstance(DATA_ITEM);
+}
+
+void ItemFrame::setItem(shared_ptr<ItemInstance> item, bool notifyNeighbors)
+{
+    if (item != nullptr)
+    {
+        item = item->copy();
+        item->count = 1;
+        item->setFramed(dynamic_pointer_cast<ItemFrame>(shared_from_this()));
+    }
+    getEntityData()->set(DATA_ITEM, item);
+    getEntityData()->markDirty(DATA_ITEM);
+
+    if (notifyNeighbors)
+    {
+        level->updateNeighbourForOutputSignal(xTile, yTile, zTile, Tile::comparator_off->id);
+    }
+}
+
+void ItemFrame::setItem(shared_ptr<ItemInstance> item)
+{
+    setItem(item, true);
+}
+
+int ItemFrame::getRotation()
+{
+    return getEntityData()->getByte(DATA_ROTATION);
+}
+
+void ItemFrame::setRotation(int rotation, bool notifyNeighbors)
+{
+    getEntityData()->set(DATA_ROTATION, static_cast<byte>(rotation % 8));
+
+    if (notifyNeighbors)
+    {
+        level->updateNeighbourForOutputSignal(xTile, yTile, zTile, Tile::comparator_off->id);
+    }
+}
+
+void ItemFrame::setRotation(int rotation)
+{
+    
+    getEntityData()->set(DATA_ROTATION, static_cast<byte>(rotation % 8));
+    level->updateNeighbourForOutputSignal(xTile, yTile, zTile, Tile::comparator_off->id);
+}
+
+
+
+void ItemFrame::addAdditonalSaveData(CompoundTag *tag) 
+{
+	if (getItem() != nullptr) 
+	{
+		tag->putCompound(L"Item", getItem()->save(new CompoundTag()));
+		tag->putByte(L"ItemRotation", static_cast<byte>(getRotation()));
+		tag->putFloat(L"ItemDropChance", dropChance);
+	}
+	HangingEntity::addAdditonalSaveData(tag);
+}
+
+void ItemFrame::readAdditionalSaveData(CompoundTag *tag) 
+{
+	CompoundTag *itemTag = tag->getCompound(L"Item");
+	if (itemTag != nullptr && !itemTag->isEmpty()) 
+	{
+		setItem(ItemInstance::fromTag(itemTag));
+		setRotation(tag->getByte(L"ItemRotation"));
+
+		if (tag->contains(L"ItemDropChance")) dropChance = tag->getFloat(L"ItemDropChance");
+	}
+	HangingEntity::readAdditionalSaveData(tag);
+}
+
+bool ItemFrame::interact(shared_ptr<Player> player) 
+{
+	if(!player->isAllowedToInteract(shared_from_this()))
+	{
+		return false;
+	}
+
+	if (getItem() == nullptr) 
+	{
+		shared_ptr<ItemInstance> item = player->getCarriedItem();
+
+		if (item != nullptr) 
+		{
+			if (!level->isClientSide)//isClientSide) 
+			{
+				setItem(item);
+				playSound(eSoundType_ENTITY_ITEMFRAME_ADD_ITEM, 1.0f, 1.0f);
+
+				if (!player->abilities.instabuild) 
+				{
+					if (--item->count <= 0) 
+					{
+						player->inventory->setItem(player->inventory->selected, nullptr);
+					}
+				}
+			}
+		}
+	} 
+	else 
+	{
+		if (!level->isClientSide)//isClientSide) 
+		{
+			setRotation(getRotation() + 1);
+			playSound(eSoundType_ENTITY_ITEMFRAME_ROTATE_ITEM, 1.0f, 1.0f);
+		}
+	}
+
+	return true;
+}
+
+bool ItemFrame::hurt(DamageSource *source, float damage)
+{
+    if (level->isClientSide) return false;
+
+    shared_ptr<ItemInstance> item = getItem();
+    
+    if (!source->isExplosion() && item != nullptr)
+    {
+        shared_ptr<Entity> sourceEntity = source->getEntity();
+        
+        if (sourceEntity != nullptr && sourceEntity->instanceof(eTYPE_PLAYER))
+        {
+            shared_ptr<Player> player = dynamic_pointer_cast<Player>(sourceEntity);
+            if (!player->abilities.instabuild)
+            {
+                shared_ptr<ItemInstance> copy = item->copy();
+                removeFramedMap(copy);
+                spawnAtLocation(copy, 0);
+            }
+            else
+            {
+                removeFramedMap(item);
+            }
+        }
+        else
+        {
+            shared_ptr<ItemInstance> copy = item->copy();
+            removeFramedMap(copy);
+            spawnAtLocation(copy, 0);
+        }
+
+        playSound(eSoundType_ENTITY_ITEMFRAME_REMOVE_ITEM, 1.0f, 1.0f);
+        setItem(nullptr);
+        return true;
+    }
+
+    playSound(eSoundType_ENTITY_ITEMFRAME_BREAK, 1.0f, 1.0f);
+    return HangingEntity::hurt(source, damage);
+}
+
+int ItemFrame::getAnalogOutput()
+{
+    shared_ptr<ItemInstance> item = getItem();
+    if (item == nullptr) return 0;
+    return getRotation() % 8 + 1;
+}
+
+
+float ItemFrame::getPickRadius()
+{
+	return 0.0f;
+}

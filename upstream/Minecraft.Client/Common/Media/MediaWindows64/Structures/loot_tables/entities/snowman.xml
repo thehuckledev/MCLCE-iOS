@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<loot_table>
+  <pools>
+    <pool>
+      <rolls>1</rolls>
+      <entries>
+        <entry>
+          <type>item</type>
+          <name>minecraft:snowball</name>
+          <weight>1</weight>
+          <functions>
+            <function>
+              <function>set_count</function>
+              <count>
+                <min>0</min>
+                <max>15</max>
+              </count>
+            </function>
+          </functions>
+        </entry>
+      </entries>
+    </pool>
+  </pools>
+</loot_table>

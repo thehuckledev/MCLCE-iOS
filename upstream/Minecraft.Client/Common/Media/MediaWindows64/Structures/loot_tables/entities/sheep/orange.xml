@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<loot_table>
+  <pools>
+    <pool>
+      <rolls>1</rolls>
+      <entries>
+        <entry>
+          <type>item</type>
+          <name>minecraft:wool</name>
+          <weight>1</weight>
+          <functions>
+            <function>
+              <function>set_data</function>
+              <data>1</data>
+            </function>
+          </functions>
+        </entry>
+      </entries>
+    </pool>
+    <pool>
+      <rolls>1</rolls>
+      <entries>
+        <entry>
+          <type>loot_table</type>
+          <name>minecraft:entities/sheep</name>
+          <weight>1</weight>
+        </entry>
+      </entries>
+    </pool>
+  </pools>
+</loot_table>
