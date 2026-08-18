@@ -27,10 +27,10 @@ if old2 not in src: sys.exit("Tesselator anchor not found")
 src = src.replace(old2, new2, 1)
 
 # Before getGlobalIndexForChunk
-old3 = "\tint lists = levelRenderer->getGlobalIndexForChunk(this->x,this->y,this->z,level) * 2;"
+old3 = "\tint lists = levelRenderer->getGlobalIndexForChunk(this->x,this->y,this->z,level) * LevelRenderer::CHUNK_RENDER_LAYERS;"
 new3 = (
     "\tapp.DebugPrintf(\"CRB_CKPT before getGlobalIndexForChunk lr=%p level=%p\", levelRenderer, level);\n"
-    "\tint lists = levelRenderer->getGlobalIndexForChunk(this->x,this->y,this->z,level) * 2;\n"
+    "\tint lists = levelRenderer->getGlobalIndexForChunk(this->x,this->y,this->z,level) * LevelRenderer::CHUNK_RENDER_LAYERS;\n"
     "\tapp.DebugPrintf(\"CRB_CKPT after getGlobalIndexForChunk lists=%d\", lists);"
 )
 if old3 not in src: sys.exit("getGlobalIndex anchor not found")
@@ -74,21 +74,20 @@ if old7 not in src: sys.exit("empty check anchor not found")
 src = src.replace(old7, new7, 1)
 
 # bracket the layer loop
-old8 = "\tfor (int currentLayer = 0; currentLayer < 2; currentLayer++)\n\t{\n\t\tbool renderNextLayer = false;"
+old8 = "\tfor (int currentLayer = 0; currentLayer < LevelRenderer::CHUNK_RENDER_LAYERS; currentLayer++)\n\t{"
 new8 = (
     "\tapp.DebugPrintf(\"CRB_CKPT entering currentLayer loop\");\n"
-    "\tfor (int currentLayer = 0; currentLayer < 2; currentLayer++)\n\t{\n"
-    "\t\tapp.DebugPrintf(\"CRB_CKPT layer=%d entry\", currentLayer);\n"
-    "\t\tbool renderNextLayer = false;"
+    "\tfor (int currentLayer = 0; currentLayer < LevelRenderer::CHUNK_RENDER_LAYERS; currentLayer++)\n\t{\n"
+    "\t\tapp.DebugPrintf(\"CRB_CKPT layer=%d entry\", currentLayer);"
 )
 if old8 not in src: sys.exit("layer loop anchor not found")
 src = src.replace(old8, new8, 1)
 
 # Log post-layer rendered value
-old9 = "\t\tif (rendered)\n\t\t{\n\t\t\tlevelRenderer->clearGlobalChunkFlag(this->x, this->y, this->z, level, LevelRenderer::CHUNK_FLAG_EMPTY0, currentLayer);"
+old9 = "\t\tif (rendered)\n\t\t{\n\t\t\tif (currentLayer < 2)\n\t\t\t{\n\t\t\t\tlevelRenderer->clearGlobalChunkFlag(this->x, this->y, this->z, level, LevelRenderer::CHUNK_FLAG_EMPTY0, currentLayer);"
 new9 = (
     "\t\tapp.DebugPrintf(\"CRB_CKPT layer=%d done rendered=%d started=%d xyz=%d,%d,%d\", currentLayer, (int)rendered, (int)started, this->x, this->y, this->z);\n"
-    "\t\tif (rendered)\n\t\t{\n\t\t\tlevelRenderer->clearGlobalChunkFlag(this->x, this->y, this->z, level, LevelRenderer::CHUNK_FLAG_EMPTY0, currentLayer);"
+    "\t\tif (rendered)\n\t\t{\n\t\t\tif (currentLayer < 2)\n\t\t\t{\n\t\t\t\tlevelRenderer->clearGlobalChunkFlag(this->x, this->y, this->z, level, LevelRenderer::CHUNK_FLAG_EMPTY0, currentLayer);"
 )
 if old9 not in src: sys.exit("rendered check anchor not found")
 src = src.replace(old9, new9, 1)
